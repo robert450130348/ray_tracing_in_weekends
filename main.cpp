@@ -6,14 +6,14 @@
 bool hit_sphere(const point3& sphere_center, double radius, const ray& r) {
     vec3 co = r.origin() - sphere_center;
     auto a = dot(r.direction(), r.direction());
-    auto b = 2.0 * dot(co, r.direction());
+    auto half_b = dot(co, r.direction());
     auto c = dot(co, co) - radius * radius;
-    auto discriminant = b*b - 4*a*c;
+    auto discriminant = half_b*half_b - a*c;
 
     if (discriminat < 0) {
         return -1.0;
     } else {
-        return (-b - sqrt(discriminant)) / (2.0*a);
+        return (-half_b - sqrt(discriminant)) / a;
     }
 }
 
